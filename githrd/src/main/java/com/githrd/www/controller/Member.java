@@ -164,4 +164,70 @@ public class Member {
 		
 		return mv;
 	}
+	
+	@RequestMapping("/myInfo.blp")
+	public ModelAndView myInfo(ModelAndView mv, String id) {
+		// 데이터 가져오고
+		MemberVO mVO = mDao.getIdInfo(id);
+		// 뷰에 데이터 심고
+		mv.addObject("DATA" , mVO);
+		// 뷰 정하고
+		mv.setViewName("member/memberInfo");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/memberInfo.blp")
+	public ModelAndView memberInfo(ModelAndView mv, int mno) {
+		// 데이터 가져오고
+		MemberVO mVO = mDao.getMnoInfo(mno);
+		// 뷰에 데이터 심고
+		mv.addObject("DATA" , mVO);
+		// 뷰 정하고
+		mv.setViewName("member/memberInfo");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/memberList.blp")
+	public ModelAndView memberList(ModelAndView mv) {
+		// 데이터 가져오고...
+		List<MemberVO> list = mDao.membList();
+		// 데이터 심고
+		mv.addObject("LIST", list);
+		// 뷰 설정하고
+		mv.setViewName("member/memberList");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/delMember.blp")
+	public ModelAndView delMember(ModelAndView mv, String id, RedirectView rv, HttpSession session) {
+		String sid = (String) session.getAttribute("SID");
+		if(sid == null) {
+			rv.setUrl("/www/member/login.blp");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		if(!id.equals(sid)) {
+			rv.setUrl("/www/member/myInfo.blp");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		int cnt = mDao.delMember(id);
+		
+		if(cnt == 1) {
+			// 세션에 기억시켜둔 데이터를 삭제하고
+			session.removeAttribute("SID");
+			rv.setUrl("/www/");
+		} else {
+			rv.setUrl("/www/member/myInfo.blp");
+		}
+		
+		mv.setView(rv);
+		return mv;
+	}
+	
 }
