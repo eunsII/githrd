@@ -151,7 +151,10 @@ public class Member {
 	@RequestMapping(path="/joinProc.blp", method=RequestMethod.POST)
 	public ModelAndView joinProc(MemberVO mVO, ModelAndView mv, 
 									RedirectView rv, HttpSession session) {
+//		System.out.println("########### before mno : " + mVO.getMno());
 		int cnt = mDao.addMember(mVO);
+//		System.out.println("########### after mno : " + mVO.getMno());
+		
 		if(cnt == 1) {
 			// 성공한 경우
 			session.setAttribute("SID", mVO.getId());
@@ -227,6 +230,34 @@ public class Member {
 		}
 		
 		mv.setView(rv);
+		return mv;
+	}
+	
+	// 회원정보 수정 폼보기 요청 처리함수
+	@RequestMapping("/myInfoEdit.blp")
+	public ModelAndView myInfoEdit(ModelAndView mv, String id, HttpSession session, RedirectView rv) {
+		String sid = (String) session.getAttribute("SID");
+		if(sid == null) {
+			rv.setUrl("/www/member/login.blp");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		if(!id.equals(sid)) {
+			rv.setUrl("/www/main.blp");
+			mv.setView(rv);
+			return mv;
+		}
+		
+		// 데이터베이스 조회
+		MemberVO mVO = mDao.getIdInfo(id);
+		List<MemberVO> list = mDao.getAvtList(id);
+		
+		mv.addObject("DATA", mVO);
+		mv.addObject("LIST", list);
+		
+		// 뷰 정하고
+		mv.setViewName("member/editInfo");
 		return mv;
 	}
 	

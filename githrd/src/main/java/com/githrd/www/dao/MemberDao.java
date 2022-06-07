@@ -26,6 +26,9 @@ public class MemberDao {
 	public List<MemberVO> getAvtList(){
 		return sqlSession.selectList("mSQL.avtList");
 	}
+	public List<MemberVO> getAvtList(String id){
+		return sqlSession.selectList("mSQL.genAvtList", id);
+	}
 	
 	// 회원정보 데이터베이스 추가작업 전담 처리함수
 	public int addMember(MemberVO mVO) {

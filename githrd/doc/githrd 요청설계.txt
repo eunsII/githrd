@@ -79,6 +79,13 @@
 처리함수	:	myInfoEdit()
 뷰			:	/WEB-INF/views/member/editInfo.jsp
 --------------------------------------------------------------------------------
+# 내 정보 수정 처리 요청
+요청내용	:	/www/member/infoEditProc.blp
+파라미터	:	mno, pw, mail, tel, ano
+컨트롤러	:	com.githrd.www.controller.Member
+처리함수	:	infoEditProc()
+뷰			:	/WEB-INF/views/member/editInfo.jsp
+--------------------------------------------------------------------------------
 # 회원 정보보기 요청
 요청내용	:	/www/member/memberInfo.blp
 파라미터	:	mno
