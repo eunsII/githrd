@@ -225,4 +225,41 @@
 		    #{mno}, #{name}, #{id}, #{pw}, #{mail}, #{tel}, #{gen}, #{ano}
 		)
 	</insert>
+	
+	<update id="editInfo" parameterType="mVO">
+		UPDATE
+			member
+		<set>
+			<if test="pw neq null">
+				pw = #{pw},
+			</if>
+			<if test="mail neq null">
+				mail = #{mail},
+			</if>
+			<if test="tel neq null">
+				tel = #{tel},
+			</if>
+			<if test="ano neq 0">
+				avt = #{ano},
+			</if>
+		</set>
+<!--  
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="pw neq null">
+				pw = #{pw},
+			</if>
+			<if test="mail neq null">
+				mail = #{mail},
+			</if>
+			<if test="tel neq null">
+				tel = #{tel},
+			</if>
+			<if test="ano neq 0">
+				avt = #{ano},
+			</if>
+		</trim>
+-->
+		WHERE
+			mno = #{mno}
+	</update>
 </mapper>

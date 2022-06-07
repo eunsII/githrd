@@ -261,4 +261,18 @@ public class Member {
 		return mv;
 	}
 	
+	// 내정보 수정 처리요청 처리 함수
+	@RequestMapping("/infoEditProc.blp")
+	public ModelAndView infoEditProc(ModelAndView mv, MemberVO mVO, RedirectView rv) {
+		int cnt = mDao.editMyInfo(mVO);
+		String view = "member/redirect";
+		if(cnt == 0) {
+			mv.addObject("VIEW", "/www/member/myInfoEdit.blp");
+		} else {
+			mv.addObject("VIEW", "/www/member/myInfo.blp");
+		}
+		
+		mv.setViewName(view);
+		return mv;
+	}
 }
