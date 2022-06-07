@@ -10,14 +10,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.githrd.www.dao.MemberDao;
-import com.githrd.www.vo.MemberVO;
+import com.githrd.www.dao.*;
+import com.githrd.www.vo.*;
 
 @Controller
 @RequestMapping("/member")
 public class Member {
 	@Autowired
 	MemberDao mDao;
+	@Autowired
+	GBoardDao gDao;
 	
 	@RequestMapping("/login.blp")
 	public ModelAndView loginForm(ModelAndView mv, HttpSession session) {
@@ -43,7 +45,14 @@ public class Member {
 		if(cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
 			session.setAttribute("MSG_CHECK", "OK");
-			rv.setUrl("/www/main.blp");
+			int count = gDao.getMyCount(mVO.getId());
+			session.setAttribute("CNT", count);
+			
+			if(count == 0) {
+				rv.setUrl("/www/gBoard/gBoardList.blp");
+			} else {
+				rv.setUrl("/www/main.blp");
+			}
 		} else {
 			rv.setUrl("/www/member/login.blp");
 		}
@@ -159,7 +168,15 @@ public class Member {
 		if(cnt == 1) {
 			// 성공한 경우
 			session.setAttribute("SID", mVO.getId());
-			rv.setUrl("/www/");
+			session.setAttribute("MSG_CHECK", "OK");
+			int count = gDao.getMyCount(mVO.getId());
+			session.setAttribute("CNT", count);
+			
+			if(count == 0) {
+				rv.setUrl("/www/gBoard/gBoardList.blp");
+			} else {
+				rv.setUrl("/www/main.blp");
+			}
 		} else {
 			rv.setUrl("/www/member/join.blp");
 		}

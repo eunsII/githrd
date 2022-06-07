@@ -6,7 +6,7 @@
 	<!-- 방명록 작성글 수 조회 질의명령 -->
 	<select id="myCount" resultType="int" parameterType="string">
 		SELECT
-            count(*)
+            COUNT(*)
         FROM
             guestboard
         WHERE
@@ -23,7 +23,7 @@
 	<!-- 총 게시글 수 조회 질의명령 -->
 	<select id="totalCount" resultType="int">
 		SELECT
-			count(*)
+			COUNT(*)
 		FROM
 			guestboard
 		WHERE
@@ -31,6 +31,28 @@
 	</select>
 	
 	<!-- 방명록 목록조회 질의명령 -->
-	<select id="gBoardList" resultType="bVO">
+	<select id="gBoardList" resultType="bVO" parameterType="page">
+		SELECT
+		    id, avatar, wdate, body
+		FROM
+		    (
+		        SELECT
+		            ROWNUM rno, id, avatar, wdate, body
+		        FROM
+		            (
+		                SELECT
+		                    id, savename avatar, wdate, body
+		                FROM
+		                    guestboard g, member m, avatar a
+		                WHERE
+		                    g.isshow = 'Y'
+		                    AND writer = mno
+		                    AND avt = ano
+		                ORDER BY
+		                    wdate DESC
+		            )
+		    )
+		WHERE
+		   rno BETWEEN #{startCont} AND #{endCont}
 	</select>
 </mapper>
