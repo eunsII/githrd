@@ -42,6 +42,7 @@ public class Member {
 		int cnt = mDao.getLogin(mVO);
 		if(cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
+			session.setAttribute("MSG_CHECK", "OK");
 			rv.setUrl("/www/main.blp");
 		} else {
 			rv.setUrl("/www/member/login.blp");

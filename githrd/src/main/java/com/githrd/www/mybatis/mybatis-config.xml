@@ -15,5 +15,6 @@
 	
 	<mappers>
 		<mapper resource="com/githrd/www/sql/MemberSQL.xml" />
+		<mapper resource="com/githrd/www/sql/GBoardSQL.xml" />
 	</mappers>
 </configuration>

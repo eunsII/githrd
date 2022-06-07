@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gSQL">
+	<!-- 방명록 작성글 수 조회 질의명령 -->
+	<select id="myCount" resultType="int" parameterType="string">
+		SELECT
+            count(*)
+        FROM
+            guestboard
+        WHERE
+            writer = (
+                        SELECT
+                            mno
+                        FROM
+                            member
+                        WHERE
+                            id = #{id}
+                    )
+	</select>
+	
+	<!-- 총 게시글 수 조회 질의명령 -->
+	<select id="totalCount" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			guestboard
+		WHERE
+			isshow = 'Y'
+	</select>
+	
+	<!-- 방명록 목록조회 질의명령 -->
+	<select id="gBoardList" resultType="bVO">
+	</select>
+</mapper>

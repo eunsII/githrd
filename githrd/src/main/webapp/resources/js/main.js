@@ -39,4 +39,9 @@ $(document).ready(function(){
 	$('#mlbtn').click(function(){
 		$(location).attr('href', '/www/member/memberList.blp');
 	});
+	
+	/* 방명록 버튼 클릭 이벤트  */
+	$('#gbtn').click(function(){
+		$(location).attr('href', '/www/gBoard/gBoardList.blp');
+	});
 });
