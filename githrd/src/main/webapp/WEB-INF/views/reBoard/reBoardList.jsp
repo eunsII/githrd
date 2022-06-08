@@ -102,8 +102,7 @@
 	<div id="modal" class="w3-modal" style="display: block;">
 	    <div class="w3-modal-content mxw650 w3-animate-top w3-card-4">
 	      <header class="w3-container w3-blue"> 
-	        <span onclick="document.getElementById('modal').style.display='none'" 
-	        class="w3-button w3-display-topright">&times;</span>
+	        <span class="w3-button w3-display-topright" id="modalClose">&times;</span>
 	        <h2>GITHRD Message</h2>
 	      </header>
 	      <div class="w3-container w3-center">
@@ -117,6 +116,8 @@
 	<form method="POST" action="/www/reBoard/reBoardList.blp" id="frm" name="frm">
 		<input type="hidden" id="nowPage" name="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" id="bno" name="bno">
+		<input type="hidden" id="id" name="id" value="${SID}">
+		<input type="hidden" id="view" name="vw">
 	</form>
 </body>
 </html>

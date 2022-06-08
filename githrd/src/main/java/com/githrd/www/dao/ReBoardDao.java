@@ -32,4 +32,14 @@ public class ReBoardDao {
 	public int getTotal() {
 		return sqlSession.selectOne("rSQL.getTotal");
 	}
+	
+	// 장성자 데이터 조회 전담 처리함수
+	public BoardVO getWriterInfo(String id) {
+		return sqlSession.selectOne("rSQL.getWriterInfo", id);
+	}
+	
+	// 게시글 추가 데이터베이스 작업 전담 처리함수(댓글 포함)
+	public int addReBoard(BoardVO bVO) {
+		return sqlSession.insert("rSQL.addReBoard", bVO);
+	}
 }

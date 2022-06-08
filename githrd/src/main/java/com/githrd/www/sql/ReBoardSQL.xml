@@ -43,4 +43,37 @@
 		WHERE
 		    rno BETWEEN #{startCont} AND #{endCont}
 	</select>
+	
+	<select id="getWriterInfo" resultType="bVO" parameterType="string">
+		SELECT
+			mno, id, savename avatar
+		FROM
+			member, avatar
+		WHERE
+			avt = ano
+			AND id = #{id}
+	</select>
+	
+	<!-- 게시글 등록 질의 명령 -->
+	<insert id="addReBoard" parameterType="bVO">
+		<selectKey keyProperty="bno" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(rbno) + 1, 100001)
+			FROM
+				reboard
+		</selectKey>
+		INSERT INTO
+			reboard(
+				rbno, rbmno, body
+				<if test="upno neq 0">
+					, upno
+				</if>
+			)
+		VALUES(
+			#{bno}, #{mno}, #{body}
+			<if test="upno neq 0">
+				, #{upno}
+			</if>
+		)
+	</insert>
 </mapper>

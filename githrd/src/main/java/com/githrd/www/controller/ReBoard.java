@@ -2,6 +2,8 @@ package com.githrd.www.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +36,7 @@ public class ReBoard {
 	 * 댓글게시판 리스트보기 요청
 	 */
 	@RequestMapping("/reBoardList.blp")
-	public ModelAndView reBoardList(ModelAndView mv, PageUtil page) {
+	public ModelAndView reBoardList(ModelAndView mv, PageUtil page, String msg) {
 		// 할일
 		// 데이터베이스에서 데이터 가져오고
 		// PageUtil이 먼저 만들어져야하기 때문에
@@ -47,10 +49,46 @@ public class ReBoard {
 		// 리스트를 조회한다.
 		List<BoardVO> list = rDao.getList(page);
 		
+		if(msg != null) {
+			mv.addObject("MSG", msg);
+		}
+		
 		mv.addObject("LIST", list);
 		mv.addObject("PAGE", page);
 		mv.setViewName("reBoard/reBoardList");
 		
+		return mv;
+	}
+	
+	@RequestMapping(path="/reBoardWrite.blp", method=RequestMethod.POST, params={"id", "nowPage"})
+	public ModelAndView reBoardWrite(ModelAndView mv, String id, String nowPage) {
+		BoardVO bVO = rDao.getWriterInfo(id);
+		
+		// 데이터 넘겨주고
+		mv.addObject("DATA", bVO);
+		// 뷰 정하고
+		mv.setViewName("reBoard/reBoardWrite");
+		// 반환하고
+		return mv;
+	}
+	
+	@RequestMapping("/writeProc.blp")
+	public ModelAndView writeProc(ModelAndView mv, String nowPage, BoardVO bVO) {
+		int cnt = rDao.addReBoard(bVO);
+		String view = "/www/reBoard/reBoardList.blp";
+		if(cnt == 0) {
+			// 글 등록에 실패한경우 ==> 글쓰기로 돌려보낸다.
+			view = "/www/reBoard/reBoardWrite.blp";
+		} else {
+			// 글 등록에 성공한 경우...
+			nowPage = "1";
+			mv.addObject("MSG", "게시글 등록에 성공했습니다.");
+		}
+		
+		mv.addObject("VIEW", view);
+		mv.addObject("NOWPAGE", nowPage);
+		
+		mv.setViewName("reBoard/redirect");
 		return mv;
 	}
 }
