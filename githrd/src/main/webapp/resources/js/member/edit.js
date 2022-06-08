@@ -59,6 +59,7 @@ $(document).ready(function(){
 		if(!(pwBool || mailBool || telBool || anoBool)){
 			// 수정 데이터가 없는 경우이므로 뷰로 돌려보낸다.
 			$('#msgWin').css('display', 'block');
+			$('input').prop('disabled', false);
 			return;
 		}
 		
