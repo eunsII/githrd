@@ -116,8 +116,6 @@ public class Member {
 	public ModelAndView logout(ModelAndView mv, HttpSession session, String vw, String nowPage) {
 		session.removeAttribute("SID");
 		
-		System.out.println("view : " + vw);
-		
 		if(vw == null) {
 			vw = "/www/";
 		}
