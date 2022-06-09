@@ -10,7 +10,7 @@ $(document).ready(function(){
 	});
 	
 	$('#lbtn').click(function(){
-		$(location).attr('href', '/www/member/login.blp');
+		$(location).attr('href', '/www/member/login.blp?vw=/www/reBoard/reBoardList.blp&nowPage=' + $('#nowPage').val());
 	});
 	
 	$('#jbtn').click(function(){

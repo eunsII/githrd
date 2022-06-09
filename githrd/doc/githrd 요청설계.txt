@@ -12,7 +12,7 @@
 ### 회원관련 요청 설계
 # 로그인 폼 보기 요청
 요청내용	:	/www/member/login.blp
-파라미터	:	무
+파라미터	:	무 [ vw, nowPage ]
 컨트롤러	:	com.githrd.www.controller.Member
 처리함수	:	loginForm()
 뷰			:	/WEB-INF/views/member/login.jsp

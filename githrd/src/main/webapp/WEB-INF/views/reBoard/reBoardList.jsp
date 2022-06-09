@@ -117,7 +117,7 @@
 		<input type="hidden" id="nowPage" name="nowPage" value="${PAGE.nowPage}">
 		<input type="hidden" id="bno" name="bno">
 		<input type="hidden" id="id" name="id" value="${SID}">
-		<input type="hidden" id="view" name="vw">
+		<input type="hidden" id="view" name="vw" value="/www/reBoard/reBoardList.blp">
 	</form>
 </body>
 </html>
