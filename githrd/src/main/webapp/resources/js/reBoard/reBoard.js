@@ -14,7 +14,8 @@ $(document).ready(function(){
 	});
 	
 	$('#jbtn').click(function(){
-		$(location).attr('href', '/www/member/join.blp');
+		$(document.frm).attr('action', '/www/member/join.blp');
+		$('#frm').submit();
 	});
 	
 	$('#obtn').click(function(){

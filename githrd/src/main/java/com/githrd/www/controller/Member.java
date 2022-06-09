@@ -185,14 +185,10 @@ public class Member {
 		mv.setViewName("member/join");
 		return mv;
 	}
-	/*
-	public void joinForm() {
-		String view = "member/join";
-		
-//		return view;
-	}
-	*/
-	
+
+	/**
+	 * 회원가입 처리요청
+	 */
 	@RequestMapping(path="/joinProc.blp", method=RequestMethod.POST)
 	public ModelAndView joinProc(MemberVO mVO, ModelAndView mv, 
 									RedirectView rv, HttpSession session) {
@@ -218,6 +214,32 @@ public class Member {
 		
 		mv.setView(rv);
 		
+		return mv;
+	}
+	
+	// 댓글게시판에 회원가입 처리요청 처리함수
+	@RequestMapping(path="/joinProc.blp", method=RequestMethod.POST, params= {"vw", "nowPage"})
+	public ModelAndView joinProc(MemberVO mVO, ModelAndView mv, 
+			RedirectView rv, HttpSession session, String vw, String nowPage) {
+		int cnt = mDao.addMember(mVO);
+		String view = vw;
+		if(cnt == 1) {
+			// 성공한 경우
+			session.setAttribute("SID", mVO.getId());
+			session.setAttribute("MSG_CHECK", "OK");
+			int count = gDao.getMyCount(mVO.getId());
+			session.setAttribute("CNT", count);
+			
+//			rv.setUrl(vw + "?nowPage=" + nowPage); // get방식 처리
+		} else {
+//			rv.setUrl("/www/member/join.blp?vw=" + vw + "&nowPage=" + nowPage); //  get 방식 처리
+			view = "/www/member/join.blp";
+		}
+		
+//		mv.setView(rv); //  get 방식 처리
+		mv.addObject("VIEW", view);
+		mv.addObject("NOWPAGE", nowPage);
+		mv.setViewName("reBoard/redirect");
 		return mv;
 	}
 	
