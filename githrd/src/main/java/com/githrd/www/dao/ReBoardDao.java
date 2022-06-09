@@ -47,4 +47,19 @@ public class ReBoardDao {
 	public BoardVO getCommentData(BoardVO bVO) {
 		return sqlSession.selectOne("rSQL.commentData", bVO);
 	}
+	
+	// 게시글 수정데이터 조회 전담 처리함수
+	public BoardVO getEditData(BoardVO bVO) {
+		return sqlSession.selectOne("rSQL.editData", bVO);
+	}
+	
+	// 게시글 수정 등록 전담 처리함수
+	public int editProc(BoardVO bVO) {
+		return sqlSession.update("rSQL.editReBoard", bVO);
+	}
+	
+	// 게시글 삭제 전담 처리함수
+	public int delReBoard(BoardVO bVO) {
+		return sqlSession.update("rSQL.delReBoard", bVO);
+	}
 }

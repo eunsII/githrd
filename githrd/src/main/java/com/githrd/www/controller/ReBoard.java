@@ -105,4 +105,76 @@ public class ReBoard {
 		return mv;
 	}
 	
+
+	/**
+	 * 댓글 등록 요청 처리함수 
+	 */
+	@RequestMapping("/commentProc.blp")
+	public ModelAndView writeProc(ModelAndView mv, BoardVO bVO, String nowPage, String vw) {
+		
+		int result = rDao.addReBoard(bVO);
+		
+		if(result == 1) {
+			// 댓글등록 성공
+			mv.addObject("VIEW", "/www/reBoard/reBoardList.blp");
+		} else {
+			// 등록실패
+			mv.addObject("VIEW", "/www/reBoard/commentWrite.blp");
+		}
+		mv.addObject("NOWPAGE", nowPage);
+		
+		// 뷰 부르고
+		mv.setViewName("reBoard/redirect");
+		return mv;
+	}
+	
+	/**
+	 *  게시글 수정 폼보기 요청 처리함수
+	 */
+	@RequestMapping("/reBoardEdit.blp")
+	public ModelAndView reBoardEdit(ModelAndView mv, BoardVO bVO, String nowPage, String vw) {
+		bVO = rDao.getEditData(bVO);
+		
+		mv.addObject("DATA", bVO);
+		mv.setViewName("reBoard/reBoardEdit");
+		return mv;
+	}
+	
+	/**
+	 * 게시글 수정 요청 처리함수
+	 */
+	@RequestMapping("/editProc.blp")
+	public ModelAndView editProc(ModelAndView mv, BoardVO bVO, String nowPage, String vw) {
+		int result = rDao.editProc(bVO);
+		
+		if(result == 1) {
+			// 수정 성공
+			mv.addObject("VIEW", "/www/reBoard/reBoardList.blp");
+		} else {
+			// 수정 실패
+			mv.addObject("VIEW", "/www/reBoard/reBoardEdit.blp");
+		}
+		// 데이터 심고
+		mv.addObject("NOWPAGE", nowPage);
+		
+		// 뷰 부르고
+		mv.setViewName("reBoard/redirect");
+		return mv;
+	}
+	
+	/**
+	 * 게시글 삭제 요청 처리함수
+	 */
+	@RequestMapping("/delReBoard.blp")
+	public ModelAndView delReBoard(ModelAndView mv, BoardVO bVO, String nowPage, String vw) {
+		rDao.delReBoard(bVO);
+		
+		// 데이터 심고
+		mv.addObject("VIEW", vw);
+		mv.addObject("NOWPAGE", nowPage);
+		
+		// 뷰 부르고
+		mv.setViewName("reBoard/redirect");
+		return mv;
+	}
 }

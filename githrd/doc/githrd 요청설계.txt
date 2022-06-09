@@ -159,9 +159,30 @@
 --------------------------------------------------------------------------------
 # 댓글 게시판 댓글 등록 처리 요청
 요청내용	:	/www/reBoard/commentProc.blp
-파라미터	:	nowPage, mno, upno, body, vw
+파라미터	:	nowPage, vw, id, mno, upno, body
 컨트롤러	:	com.githrd.www.controller.ReBoard
 처리함수	:	writeProc()
+뷰			:	/WEB-INF/views/reBoard/redirect.jsp
+--------------------------------------------------------------------------------
+# 댓글 게시판 글 수정 폼 보기 요청
+요청내용	:	/www/reBoard/reBoardEdit.blp
+파라미터	:	nowPage, vw, bno
+컨트롤러	:	com.githrd.www.controller.ReBoard
+처리함수	:	reBoardEdit()
+뷰			:	/WEB-INF/views/reBoard/reBoardEdit.jsp
+--------------------------------------------------------------------------------
+# 댓글 게시판 글 수정 처리 요청
+요청내용	:	/www/reBoard/editProc.blp
+파라미터	:	nowPage, vw, bno, body
+컨트롤러	:	com.githrd.www.controller.ReBoard
+처리함수	:	editProc()
+뷰			:	/WEB-INF/views/reBoard/redirect.jsp
+--------------------------------------------------------------------------------
+# 댓글 게시판 글 삭제 처리 요청
+요청내용	:	/www/reBoard/delReBoard.blp
+파라미터	:	nowPage, vw, bno
+컨트롤러	:	com.githrd.www.controller.ReBoard
+처리함수	:	delReBoard()
 뷰			:	/WEB-INF/views/reBoard/redirect.jsp
 --------------------------------------------------------------------------------
 

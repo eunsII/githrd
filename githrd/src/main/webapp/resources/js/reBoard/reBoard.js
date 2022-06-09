@@ -71,7 +71,53 @@ $(document).ready(function(){
 			return;
 		}
 		
+		$('#frm').submit();
 	});
 	
+	$('.editbtn').click(function(){
+		var sno = $(this).parent().attr('id');
+		
+		$('#bno').val(sno);
+		
+		$('#frm').attr('action', '/www/reBoard/reBoardEdit.blp');
+		$('#frm').submit();
+	});
 	
+	$('#editbtn').click(function(){
+		// 태그 내용읽고
+		var oritxt = $('#obody').val();
+		var txt = $('#body').val();
+		
+		if(oritxt == txt){
+			alert('### 수정된 내용이 없습니다. ###');
+			return;
+		}
+		
+		$('#frm').submit();
+	});
+	
+	$('.delbtn').click(function(){
+		var sno = $(this).parent().attr('id');
+		
+		$('#bno').val(sno);
+		
+		$('#frm').attr('action', '/www/reBoard/delReBoard.blp');
+		$('#frm').submit();
+	});
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
