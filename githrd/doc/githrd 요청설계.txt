@@ -150,6 +150,20 @@
 처리함수	:	writeProc()
 뷰			:	/WEB-INF/views/reBoard/redirect.jsp
 --------------------------------------------------------------------------------
+# 댓글 게시판 댓글 작성 폼 보기 요청
+요청내용	:	/www/reBoard/commentWrite.blp
+파라미터	:	nowPage, id, bno, vw
+컨트롤러	:	com.githrd.www.controller.ReBoard
+처리함수	:	commentWrite()
+뷰			:	/WEB-INF/views/reBoard/reBoardComment.jsp
+--------------------------------------------------------------------------------
+# 댓글 게시판 댓글 등록 처리 요청
+요청내용	:	/www/reBoard/commentProc.blp
+파라미터	:	nowPage, mno, upno, body, vw
+컨트롤러	:	com.githrd.www.controller.ReBoard
+처리함수	:	writeProc()
+뷰			:	/WEB-INF/views/reBoard/redirect.jsp
+--------------------------------------------------------------------------------
 
 
 

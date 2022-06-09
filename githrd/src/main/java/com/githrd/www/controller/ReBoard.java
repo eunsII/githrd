@@ -91,4 +91,18 @@ public class ReBoard {
 		mv.setViewName("reBoard/redirect");
 		return mv;
 	}
+	
+	// 댓글 작성 폼보기 처리함수
+	@RequestMapping("/commentWrite.blp")
+	public ModelAndView commentWrite(ModelAndView mv, BoardVO bVO, String nowPage, String vw) {
+		bVO = rDao.getCommentData(bVO);
+		
+		// 데이터 셋팅하고
+		mv.addObject("DATA", bVO);
+		
+		// 뷰 부르고
+		mv.setViewName("reBoard/reBoardComment");
+		return mv;
+	}
+	
 }

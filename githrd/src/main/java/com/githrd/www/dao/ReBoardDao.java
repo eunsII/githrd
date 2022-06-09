@@ -42,4 +42,9 @@ public class ReBoardDao {
 	public int addReBoard(BoardVO bVO) {
 		return sqlSession.insert("rSQL.addReBoard", bVO);
 	}
+	
+	// 댓글폼 데이터 조회 전담 처리함수
+	public BoardVO getCommentData(BoardVO bVO) {
+		return sqlSession.selectOne("rSQL.commentData", bVO);
+	}
 }

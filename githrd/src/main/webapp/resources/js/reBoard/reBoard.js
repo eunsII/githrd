@@ -56,4 +56,22 @@ $(document).ready(function(){
 		
 		$('#frm').submit();
 	});
+	
+	$('.comment').click(function(){
+		var sno = $(this).parent().attr('id');
+		$('#bno').val(sno);
+		
+		$('#frm').attr('action', '/www/reBoard/commentWrite.blp');
+		$('#frm').submit();
+	});
+	
+	$('#cmtbtn').click(function(){
+		var txt = $('#body').val();
+		if(!txt){
+			return;
+		}
+		
+	});
+	
+	
 });
