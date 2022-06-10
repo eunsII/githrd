@@ -193,3 +193,124 @@ VALUES(
 );
 
 commit;
+
+SELECT
+    sqno qno, sqbody body
+FROM
+    surveyQuest
+WHERE
+    sq_sino IN (
+        SELECT
+            sino
+        FROM
+            surveyinfo
+        WHERE
+            SYSDATE BETWEEN sistart AND siend
+    )
+    AND squpno IS NULL
+;
+
+SELECT
+    sqno qno, sqbody body
+FROM
+    surveyQuest
+WHERE
+    sq_sino IN (
+        SELECT
+            sino
+        FROM
+            surveyinfo
+        WHERE
+            SYSDATE BETWEEN sistart AND siend
+    )
+    AND squpno = 100001
+;
+
+
+-- 'jennie' 회원이 현재 진행중인 설문들 중 참여하지 않은 
+-- 설문들의 갯수를 조회하는 질의명령을 작성하세요.
+-- ==> 결과는 1이 조회되어야 한다.
+
+INSERT INTO
+    survey(svno, smno, sv_sqno)
+VALUES(
+    (SELECT NVL(MAX(svno) + 1, 100001) FROM survey),
+    1000, 100002
+);
+
+INSERT INTO
+    survey(svno, smno, sv_sqno)
+VALUES(
+    (SELECT NVL(MAX(svno) + 1, 100001) FROM survey),
+    1000, 100009
+);
+
+INSERT INTO
+    survey(svno, smno, sv_sqno)
+VALUES(
+    (SELECT NVL(MAX(svno) + 1, 100001) FROM survey),
+    1000, 100014
+);
+
+INSERT INTO
+    survey(svno, smno, sv_sqno)
+VALUES(
+    (SELECT NVL(MAX(svno) + 1, 100001) FROM survey),
+    1000, 100018
+);
+
+INSERT INTO
+    survey(svno, smno, sv_sqno)
+VALUES(
+    (SELECT NVL(MAX(svno) + 1, 100001) FROM survey),
+    1000, 100022
+);
+
+
+commit;
+
+SELECT
+    COUNT(*)
+FROM
+    surveyInfo
+WHERE
+    sysdate BETWEEN sistart AND siend
+    AND sino NOT IN (
+        SELECT
+            DISTINCT sq_sino
+        FROM
+            survey, surveyquest, member
+        WHERE
+            sv_sqno = sqno
+            AND smno = mno
+            AND id = 'jennie'
+    )
+;
+
+
+SELECT * FROM SURVEYQUEST;
+
+SELECT
+    sino, sititle, 
+    (
+        SELECT
+            count(DISTINCT sq_sino)
+        FROM
+            survey, surveyQuest, member
+        WHERE
+            sv_sqno = sqno
+            AND smno = mno
+            AND id = 'euns'
+        GROUP BY
+            sq_sino
+        HAVING
+            sq_sino = sino
+    ) cnt
+FROM
+    surveyinfo
+WHERE
+    sysdate BETWEEN sistart AND siend
+;
+
+
+
