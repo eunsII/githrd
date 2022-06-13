@@ -291,26 +291,33 @@ WHERE
 SELECT * FROM SURVEYQUEST;
 
 SELECT
-    sino, sititle, 
-    (
-        SELECT
+    sino, sititle title, 
+    NVL(
+        (SELECT
             count(DISTINCT sq_sino)
         FROM
             survey, surveyQuest, member
         WHERE
             sv_sqno = sqno
             AND smno = mno
-            AND id = 'euns'
+            AND id = 'jennie'
         GROUP BY
             sq_sino
         HAVING
-            sq_sino = sino
-    ) cnt
+            sq_sino = sino), 0) cnt
 FROM
     surveyinfo
 WHERE
     sysdate BETWEEN sistart AND siend
 ;
 
+-- 종료된 설문 리스트 가져오기 질의명령
 
+SELECT
+    sino, sititle title
+FROM
+    surveyinfo
+WHERE
+    siend < sysdate
+;
 
