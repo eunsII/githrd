@@ -60,9 +60,10 @@ public class Survey {
 			System.out.println("qno : " + no);
 		}
 		*/
-		boolean bool = false;
-		bool = sSrvc.addAllDap(sVO);
+		boolean bool = sSrvc.applyTx(sVO);
+		
 		String view = "/www/survey/surveyResult.blp";
+		
 		if(!bool) {
 			// 실패한 작업이 있는 경우
 			view = "/www/survey/survey.blp";
@@ -73,6 +74,13 @@ public class Survey {
 		
 		// 뷰 정하고
 		mv.setViewName("survey/redirect");
+		return mv;
+	}
+	
+	// 설문 결과페이지 폼보기 요청
+	@RequestMapping("/surveyResult.blp")
+	public ModelAndView surveyResult(ModelAndView mv) {
+		mv.setViewName("survey/surveyResult");
 		return mv;
 	}
 }
