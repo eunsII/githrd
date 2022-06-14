@@ -98,7 +98,7 @@
 	
 	<!-- 응답 추가 질의명령 -->
 	<insert id="addSurvey" parameterType="sVO">
-		<selectKey keyProperty="mno" resultType="in" order="BEFORE">
+		<selectKey keyProperty="mno" resultType="int" order="BEFORE">
 			SELECT
 				mno
 			FROM
