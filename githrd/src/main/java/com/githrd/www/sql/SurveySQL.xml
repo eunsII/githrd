@@ -150,5 +150,38 @@
 		    sqno = qno(+)
 		ORDER BY
 		    upno, sqno
-	</select> 
+	</select>
+	
+	<select id="bogiResult" resultType="sVO" parameterType="int">
+		SELECT
+		    sqno, sqbody body, NVL(squpno, sqno) upno, ROUND(cnt / total * 100, 2) per
+		FROM
+		    surveyQuest, 
+		    (
+		        SELECT
+		            sqno qno, COUNT(sv_sqno) cnt
+		        FROM
+		            surveyQuest, survey
+		        WHERE
+		            sqno = sv_sqno(+)
+		            AND squpno = #{sqno}
+		        GROUP BY
+		            sqno
+		        ORDER BY
+		            qno
+		    ),
+		    (
+		        SELECT
+		            count(DISTINCT smno) total
+		        FROM
+		            survey, surveyQuest
+		        WHERE
+		            sv_sqno(+) = sqno
+		            AND squpno = #{sqno}
+		    )
+		WHERE
+		    sqno = qno
+		ORDER BY
+		    upno, sqno
+	</select>
 </mapper>

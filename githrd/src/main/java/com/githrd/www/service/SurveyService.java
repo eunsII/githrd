@@ -140,4 +140,32 @@ public class SurveyService {
 		// 문항들 정보 채워주고
 		sVO.setBogi(munhang);
 	}
+	public void getResult(SurveyVO sVO) {
+		// 데이터베이스에서 데이터 가져오고
+		List<SurveyVO> list = sDao.getResultList(sVO.getSino());
+		// 위의 리스트는 문항과 보기의 정보가 혼합되어서 만들어진 리스트이다.
+		// 따라서 문항과 보기를 분리해야 한다.
+		
+		// 문항정보들을 기억할 리스트
+		sVO.setBogi(new ArrayList<SurveyVO>());
+		for(SurveyVO vo : list) {
+			if(vo.getSqno() == vo.getUpno()) {
+				// 이 경우는 문항에 해당하므로 ...
+				vo.setBogi(new ArrayList<SurveyVO>());
+				sVO.getBogi().add(vo);
+			}
+
+			if(vo.getSqno() != vo.getUpno()) {
+				// 문항의 보기리스트 채우기
+				sVO.getBogi().get(sVO.getBogi().size() - 1).getBogi().add(vo);
+			}
+		}
+	}
+	
+	public void setMunhangList(SurveyVO sVO) {
+		sVO.setBogi(sDao.getQuestList(sVO.getSino()));
+		for(SurveyVO bogi : sVO.getBogi()) {
+			bogi.setBogi(sDao.getBogiResult(bogi.getSqno()));
+		}
+	}
 }

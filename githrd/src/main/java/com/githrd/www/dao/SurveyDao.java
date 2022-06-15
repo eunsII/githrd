@@ -50,4 +50,9 @@ public class SurveyDao {
 	public List<SurveyVO> getResultList(int sino){
 		return sqlSession.selectList("sSQL.resultList", sino);
 	}
+	
+	// 설문문항의 보기 결과 조회 전담 처리함수
+	public List<SurveyVO> getBogiResult(int sqno){
+		return sqlSession.selectList("sSQL.bogiResult", sqno);
+	}
 }
