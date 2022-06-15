@@ -164,7 +164,10 @@ public class SurveyService {
 	
 	// 질의명령을 나눠서 설문 결과 가져오기
 	public void setMunhangList(SurveyVO sVO) {
+		// sVO에 문항리스트 셋팅
 		sVO.setBogi(sDao.getQuestList(sVO.getSino()));
+		
+		// 각 문항정보에 보기리스트 셋팅
 		for(SurveyVO bogi : sVO.getBogi()) {
 			bogi.setBogi(sDao.getBogiResult(bogi.getSqno()));
 		}
