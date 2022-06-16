@@ -26,7 +26,7 @@ Log 처리
 *			%m	: 로그 내용(메세지)
 *			%d	: 로깅 이벤트가 발생한 시간
 				포맷 지정
-					%d(yyyy/MM/dd HH:mm:ss) 
+					%d{yyyy/MM/dd HH:mm:ss} 
 					==> java.text.SimpleDateFormat 의 형식을 사용해서 처리
 					
 			%t	: 로그이벤트가 발생된 쓰레드 이름
