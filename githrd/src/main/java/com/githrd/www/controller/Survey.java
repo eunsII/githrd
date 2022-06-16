@@ -17,7 +17,7 @@ import com.githrd.www.vo.*;
 public class Survey {
 	
 	private static final Logger surveyLog = LoggerFactory.getLogger(Survey.class);
-	
+	private static final Logger sLog = LoggerFactory.getLogger("surveyLog");
 	@Autowired
 	SurveyDao sDao;
 	@Autowired
@@ -72,7 +72,7 @@ public class Survey {
 			// 실패한 작업이 있는 경우
 			view = "/www/survey/survey.blp";
 		} else {
-			surveyLog.info(sVO.getId() + " 님이 [ " + sVO.getSino() + " ] 번 설문에 참여 완료했습니다.");
+			sLog.info(sVO.getId() + " 님이 [ " + sVO.getSino() + " ] 번 설문에 참여 완료했습니다.");
 		}
 		
 		// 데이터심고

@@ -19,6 +19,7 @@ import com.githrd.www.vo.*;
 public class Member {
 	
 	private static final Logger memberLog = LoggerFactory.getLogger(Member.class); // 4. 
+	private static final Logger membLog = LoggerFactory.getLogger("memberLog"); // 4. 
 	
 	@Autowired
 	MemberDao mDao;
@@ -55,7 +56,7 @@ public class Member {
 		if(cnt == 1) {
 			session.setAttribute("SID", mVO.getId()); // 로그인 처리
 			// 로그처리
-			memberLog.info(mVO.getId() + " 님이 로그인 했습니다."); // 5. 로그메세지 출력....
+			membLog.info(mVO.getId() + " 님이 로그인 했습니다."); // 5. 로그메세지 출력....
 			
 			session.setAttribute("MSG_CHECK", "OK");
 			int count = gDao.getMyCount(mVO.getId());
@@ -149,7 +150,7 @@ public class Member {
 		String sid = (String) session.getAttribute("SID");
 		session.removeAttribute("SID");
 		
-		memberLog.info("### " + sid + " 님이 로그아웃 했습니다.");
+		membLog.info("### " + sid + " 님이 로그아웃 했습니다.");
 		
 		if(vw == null) {
 			vw = "/www/";
