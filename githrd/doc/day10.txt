@@ -6,6 +6,10 @@ Log 처리
 
 2. src/main/resources/log4j.xml 파일을 열어서 수정한다.
 
+3. 로그처리할 클래스에서 Logger 꺼내고
+
+4. 로그작업할 함수에서 로그 기록하고...
+
 	log4j 
 		
 		Level
