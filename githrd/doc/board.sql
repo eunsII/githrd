@@ -55,3 +55,27 @@ WHERE
 ;
 
 
+-- 게시글 내용 조회 질의명령
+-- 글번호, 아이디, 타이틀, 본문, 작성일
+
+SELECT
+    bno, id, title, body, wdate
+FROM
+    board b, member m
+WHERE
+    bmno = mno
+    AND b.isshow = 'Y'
+    AND bno = #{bno} 
+;
+
+
+-- 게시글의 첨부파일 조회 질의명령
+SELECT
+    savename, dir
+FROM
+    fileinfo
+WHERE
+    isshow = 'Y'
+    AND fbno = 100002
+;
+
