@@ -18,6 +18,13 @@ public class BoardService {
 	
 	// 단일 파일 업로드 처리함수
 	public FileVO uploadProc(MultipartFile file) {
+		// 반환값 변수
+		FileVO fVO = uploadProc(file, "/upload");
+		
+		return fVO;
+	}
+	
+	public FileVO uploadProc(MultipartFile file, String dir) {
 		/*
 			이 함수가 파일을 업로드 하기 위해서는 
 			컨트롤러에서 업로드할 파일의 정보를 받아와야 한다.
@@ -30,9 +37,9 @@ public class BoardService {
 		
 		// 저장 경로를 기억할 변수
 		String path = this.getClass().getResource("").getPath();
-		path = path.substring(0, path.indexOf("/WEB-INF")) + "/resources/upload";
+		path = path.substring(0, path.indexOf("/WEB-INF")) + "/resources" + dir;
 		
-		fVO.setDir("/www/upload/");
+		fVO.setDir("/www" + dir + "/");
 		
 		// 파일 크기
 		long len = file.getSize();

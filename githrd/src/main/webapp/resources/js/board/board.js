@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	$('#hbtn').click(function(){
 		$(location).attr('href', '/www/main.blp');
 	});
@@ -53,17 +54,26 @@ $(document).ready(function(){
 	
 	$('#filebox').on('change', '.upfile', function(evt){
 		var str = $(this).val();
+		var index = $(this).index();
+		var tmp = $('.upfile');
+		var max = tmp.length;
 		if(!str){
 			$(this).remove();
+			$('.picbox').eq(index).remove();
 			return;
 		}
-		
 		var path = URL.createObjectURL(evt.target.files[0]);
+		var el = $('.upfile');
+		if((index + 1) != el.length){
+			$('.infoAvtBox').eq(index).attr('src', path);
+		}
 		
-		$('#filebox').append('<input type="file" name="file" class="w3-input w3-border w3-margin-bottom upfile">');
-		$('#preview').append('<div class="inblock pdAll10 picbox w3-card"><div class="w3-col w3-border" style="width: 100%; height: 100%; overflow: hidden;">' +
-						'<img src="' + path + '" class="infoAvtBox">' + 
-					'</div></div>');
+		if(index == max - 1){
+			$('#filebox').append('<input type="file" name="file" class="w3-input w3-border w3-margin-bottom upfile">');
+			$('#preview').append('<div class="inblock pdAll10 picbox w3-card"><div class="w3-col w3-border" style="width: 100%; height: 100%; overflow: hidden;">' +
+							'<img src="' + path + '" class="infoAvtBox">' + 
+						'</div></div>');
+		}
 		$('#previewbox').css('display', 'block');
 	});
 	
@@ -85,4 +95,6 @@ $(document).ready(function(){
 		
 		$('#frm').submit();
 	});
+	
 });
+
