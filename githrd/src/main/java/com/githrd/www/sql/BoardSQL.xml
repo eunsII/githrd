@@ -87,7 +87,7 @@
 		)
 	</insert>
 	
-	<insert id="inserFile" parameterType="fVO">
+	<insert id="insertFile" parameterType="fVO">
 		<selectKey keyProperty="fno" resultType="int" order="BEFORE">
 			SELECT 
 				NVL(MAX(fno) + 1, 10000001) 
