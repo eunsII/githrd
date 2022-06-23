@@ -104,4 +104,20 @@ public class Board {
 		return mv;
 	}
 	
+	// 게시글 수정폼 보기 요청 처리함수
+	@RequestMapping(path="/boardEdit.blp", method=RequestMethod.POST, params= {"nowPage", "bno"})
+	public ModelAndView boardEdit(ModelAndView mv, BoardVO bVO) {
+		// 첨부파일 리스트 조회
+		List<FileVO> list = bDao.getFileList(bVO.getBno());
+		// 게시글 상세 정보 조회
+		bVO = bDao.getDetail(bVO.getBno());
+		
+		// 데이터 심고
+		mv.addObject("DATA", bVO);
+		mv.addObject("LIST", list);
+		
+		mv.setViewName("board/boardEdit");
+		return mv;
+	}
+	
 }

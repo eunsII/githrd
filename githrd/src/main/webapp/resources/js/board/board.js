@@ -5,7 +5,10 @@ $(document).ready(function(){
 	});
 	
 	$('#obtn').click(function(){
-		$(location).attr('href', '/www/member/logout.blp');
+//		$(location).attr('href', '/www/member/logout.blp');
+		$('#vw').val("/www/board/boardList.blp");
+		$('#frm').attr('action', '/www/member/logout.blp');
+		$('#frm').submit();
 	});
 	
 	$('#lbtn').click(function(){
@@ -96,5 +99,10 @@ $(document).ready(function(){
 		$('#frm').submit();
 	});
 	
+	// 수정버튼 이벤트 처리
+	$('#edit').click(function(){
+		$('#frm').attr('action', '/www/board/boardEdit.blp');
+		$('#frm').submit();
+	});
 });
 
