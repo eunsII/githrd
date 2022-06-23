@@ -27,14 +27,14 @@
 </style>
 </head>
 <body>
-	<form method="POST" action="/www/board/boardList.blp" id="frm" name="frm">
-		<input type="hidden" name="nowPage" value="${param.nowPage}">
-	</form>
-	
 	<div class="w3-content mxw700">
 		<h1 class="w3-blue w3-padding w3-center w3-card-4">게시글 수정</h1>
-		<form method="POST" action="/www/board/boardEditProc.blp" 
-				id="efrm" name="efrm" class="w3-col w3-card-4 frmpadding">
+		<input type="hidden" id="otitle" value="${DATA.title}">
+		<input type="hidden" id="obody" value="${DATA.body}">
+		<form method="POST" action="/www/board/boardEditProc.blp" encType="multipart/form-data"
+				id="frm" name="frm" class="w3-col w3-card-4 frmpadding">
+			<input type="hidden" name="nowPage" value="${param.nowPage}">
+			<input type="hidden" name="bno" value="${DATA.bno}">
 			
 			<div class="w3-col w3-margin-top w3-margin-bottom">
 				<label for="title" class="w3-col s2">Title</label>
@@ -65,7 +65,7 @@
 				<div class="w3-col m10 w3-center" id="preview">
 		<c:forEach var="data" items="${LIST}">
 			<c:if test="${not empty data.savename}">
-					<div class="inblock picbox">
+					<div class="inblock picbox evtPic" id="${data.fno}">
 				<c:if test="${data.dir eq '/www/upload/'}">
 						<img class="pic" src="${data.dir}${data.savename}"> 
 				</c:if>
@@ -84,7 +84,7 @@
 	<c:if test="${SID eq DATA.id}">
 			<div class="w3-third w3-button w3-blue" id="hbtn">home</div>
 			<div class="w3-third w3-button w3-green" id="listbtn">리스트</div>
-			<div class="w3-third w3-button w3-deep-orange" id="edit">글수정</div>
+			<div class="w3-third w3-button w3-deep-orange" id="editProc">수정등록</div>
 	</c:if>
 	<c:if test="${SID ne DATA.id}">
 			<div class="w3-half w3-button w3-blue" id="hbtn">home</div>

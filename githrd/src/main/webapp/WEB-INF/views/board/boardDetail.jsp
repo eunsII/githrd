@@ -79,9 +79,10 @@
 		
 		<div class="w3-col w3-margin-top w3-card-4">
 	<c:if test="${SID eq DATA.id}">
-			<div class="w3-third w3-button w3-blue" id="hbtn">home</div>
-			<div class="w3-third w3-button w3-green" id="listbtn">리스트</div>
-			<div class="w3-third w3-button w3-deep-orange" id="edit">글수정</div>
+			<div class="w3-quarter w3-button w3-blue" id="hbtn">home</div>
+			<div class="w3-quarter w3-button w3-green" id="listbtn">리스트</div>
+			<div class="w3-quarter w3-button w3-deep-orange" id="edit">글수정</div>
+			<div class="w3-quarter w3-button w3-red" id="dbtn">글삭제</div>
 	</c:if>
 	<c:if test="${SID ne DATA.id}">
 			<div class="w3-half w3-button w3-blue" id="hbtn">home</div>
