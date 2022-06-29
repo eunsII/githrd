@@ -58,8 +58,6 @@
 			</select>
 		</div>
 		
-		
-		
 		<!-- 사원 정보 표시창 -->
 		<div class="w3-col w3-margin-top w3-padding w3-card-4" id="infoBox">
 			<h3 class="w3-col w3-container w3-left-align"><span class="w3-text-blue ename edata"></span> 사원 정보<span id="closeWin" class="w3-button w3-right w3-hover-white">&times;</span></h3>
