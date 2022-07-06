@@ -1,6 +1,6 @@
 package com.githrd.www.dao;
 
-import java.util.List;
+import java.util.*;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,9 @@ public class MemberDao {
 	public int getLogin(MemberVO mVO) {
 		return sqlSession.selectOne("mSQL.login", mVO);
 	}
-	
+	public int getLogin(Map<String, String> map) {
+		return sqlSession.selectOne("mSQL.login", map);
+	}
 	// 아이디 카운트 조회
 	public int getIdCnt(String id) {
 		return sqlSession.selectOne("mSQL.idCnt", id);
