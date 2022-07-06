@@ -13,9 +13,22 @@ $(document).ready(function(){
 				'scate': '소분류선택'
 		};
 		
+		var ids ={
+				'xlcate': '대분류선택',
+				'lcate': '대분류선택',
+				'mcate': '중분류선택'
+				
+		};
+		
 		var el = $(this).parent().next().find('.w3-select');
 		$(el).css('display', 'none');
+		
 		var tname = $(el).attr('id');
+		if(tname == 'lcate'){
+			$('#mcate, #scate').css('display', 'none');
+		} else if(tname == 'mcate'){
+			$('#scate').css('display', 'none');
+		}
 		$(el).html('<option disabled selected>' + tarr[tname] + '</option>');
 		$.ajax({
 			url: '/www/cate/cateList.blp',
