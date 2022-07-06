@@ -68,6 +68,9 @@ $(document).ready(function(){
 	$('#emp').click(function(){
 		$(location).attr('href', '/www/emp/empPage.blp');
 	});
+	$('#cate').click(function(){
+		$(location).attr('href', '/www/cate/product.blp');
+	});
 });
 
 
