@@ -267,7 +267,29 @@ commit;
 -----------------------------------------------------------
 
 SELECT
-    cno, cate_name, upno
+    cno, cate_name
+FROM
+    category
+WHERE
+    upno IS NULL
+;
+
+
+SELECT
+    cno, cate_name cname, level
+FROM
+    category
+START WITH
+    upno IS NULL
+CONNECT BY
+    PRIOR cno = upno
+ORDER BY
+    level
+;
+
+
+SELECT
+    cno, cate_name cname
 FROM
     category
 WHERE
@@ -275,10 +297,13 @@ WHERE
 ;
 
 
-
-
-
-
+SELECT
+    cno, cate_name cname
+FROM
+    category
+WHERE
+    upno = 100002
+;
 
 ---------------------------------------------------------------------
 INSERT INTO
