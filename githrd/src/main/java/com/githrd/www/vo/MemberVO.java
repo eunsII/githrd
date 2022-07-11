@@ -62,7 +62,7 @@ public class MemberVO {
 		this.sdate = sdate;
 	}
 	public void setSdate() {
-		SimpleDateFormat form = new SimpleDateFormat("yyyy년 MM월 dd일 HH:mm:ss");
+		SimpleDateFormat form = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		sdate = form.format(jdate);
 	}
 	public String getGen() {

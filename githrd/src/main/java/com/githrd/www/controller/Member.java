@@ -12,6 +12,7 @@ import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.view.*;
 
 import com.githrd.www.dao.*;
+import com.githrd.www.service.*;
 import com.githrd.www.vo.*;
 
 @Controller
@@ -143,12 +144,12 @@ public class Member {
 	
 	@RequestMapping(path="/loginProc.blp", params="id=admin")
 	public ModelAndView adminLogin(MemberVO mVO, HttpSession session, ModelAndView mv, RedirectView rv) {
-//		System.out.println("### 관리자");
+		System.out.println("### 관리자");
 		
 		int cnt = mDao.getLogin(mVO);
 		if(cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
-			rv.setUrl("/www/main.blp");
+			rv.setUrl("/www/admin/adminPage.blp");
 		} else {
 			rv.setUrl("/www/member/login.blp");
 		}
